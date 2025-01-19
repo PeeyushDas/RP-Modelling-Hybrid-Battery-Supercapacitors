@@ -1,0 +1,178 @@
+classDiagram
+    class EnergySource {
+        -totalCapacity: double
+        -currentCharge: double
+        -outputVoltage: double
+        -maxOutputCurrent: double
+        +getTotalCapacity(): double
+        +getCurrentCharge(): double
+        +getOutputVoltage(): double
+        +supplyPower(component: Component): boolean
+        +chargeBattery(amount: double): void
+    }
+
+    class Battery {
+        -batteryType: string
+        -chargeCycles: int
+        -powerDrawRate: double
+        -degradationFactor: double
+        +getBatteryHealth(): double
+        +getRemainingCapacity(): double
+        +charge(): void
+        +discharge(): void
+    }
+
+    class Supercapacitor {
+        -capacitance: double
+        -powerDrawRate: double
+        -maxVoltage: double
+        -currentVoltage: double
+        +getChargeStatus(): double
+        +rapidCharge(): void
+        +rapidDischarge(): void
+        +balanceLoad(): void
+    }
+
+    class ComputerHardware {
+        -powerState: string
+        -temperature: double
+        -clockSpeed: double
+        +getPowerConsumption(): double
+        +adjustPerformance(): void
+        +thermalThrottle(): void
+    }
+
+    class AppsProcessor {
+        -cores: int
+        -powerDrawRate: double
+        -activeThreads: int
+        -cacheSize: double
+        +executeApp(appId: string): void
+        +adjustClockSpeed(speed: double): void
+        +optimizePower(): void
+        +getProcessorLoad(): double
+    }
+
+    class ModemProcessor {
+        -signalStrength: double
+        -powerDrawRate: double
+        -activeConnections: int
+        -networkMode: string
+        +establishConnection(): void
+        +handleDataTransfer(): void
+        +optimizeSignal(): void
+        +switchNetworkMode(mode: string): void
+    }
+
+    class DSP {
+        -signalType: string
+        -powerDrawRate: double
+        -processingMode: string
+        -samplingRate: double
+        +processSIgnal(signal: Signal): void
+        +optimizeProcessing(): void
+        +adjustSamplingRate(): void
+    }
+
+    class Storage {
+        -capacity: double
+        -usedSpace: double
+        -powerDrawRate: double
+        +read(address: int): data
+        +write(address: int, data: Data): void
+        +optimize(): void
+    }
+
+    class IO {
+        -status: string
+        -powerDrawRate: double
+        -interruptQueue: Queue
+        +handleInput(): void
+        +generateOutput(): void
+        +setPowerState(state: string): void
+    }
+
+    class Communication {
+        -protocol: string
+        -powerDrawRate: double
+        -connectionStatus: string
+        +initializeConnection(): void
+        +transmitData(data: Data): void
+        +receiveData(): Data
+        +optimizePower(): void
+    }
+
+    EnergySource <|-- Battery
+    EnergySource <|-- Supercapacitor
+    ComputerHardware "1" *-- "1" AppsProcessor
+    ComputerHardware "1" *-- "1" ModemProcessor
+    ComputerHardware "1" *-- "1" DSP
+    ComputerHardware "1" o-- "*" Storage
+    ComputerHardware "1" o-- "*" IO
+    ComputerHardware "1" o-- "*" Communication
+    EnergySource "1" -- "*" ComputerHardware : powers >
+    Storage <|-- SDCard
+    Storage <|-- Flash
+    IO <|-- Display
+    IO <|-- Keyboard
+    IO <|-- Speaker
+    Communication <|-- Bluetooth
+    Communication <|-- PhoneRadio
+    Communication <|-- WifiRadio
+
+    class SDCard {
+        -transferSpeed: double
+        -powerDrawRate: double
+        +mount(): void
+        +unmount(): void
+    }
+
+    class Flash {
+        -writeSpeed: double
+        -powerDrawRate: double
+        +eraseBlock(): void
+        +writeBlock(): void
+    }
+
+    class Display {
+        -brightness: int
+        -powerDrawRate: double
+        -resolution: string
+        +adjustBrightness(): void
+        +updateScreen(): void
+    }
+
+    class Keyboard {
+        -backlight: boolean
+        -powerDrawRate: double
+        +handleKeyPress(): void
+        +toggleBacklight(): void
+    }
+
+    class Speaker {
+        -volume: int
+        -powerDrawRate: double
+        +playSound(): void
+        +adjustVolume(): void
+    }
+
+    class Bluetooth {
+        -version: string
+        -powerDrawRate: double
+        +pair(): void
+        +unpair(): void
+    }
+
+    class PhoneRadio {
+        -band: string
+        -powerDrawRate: double
+        +scanNetworks(): void
+        +connect(): void
+    }
+
+    class WifiRadio {
+        -standard: string
+        -powerDrawRate: double
+        +scanNetworks(): void
+        +authenticate(): void
+    }
