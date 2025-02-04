@@ -1,0 +1,40 @@
+stateDiagram-v2
+    [*] --> Launch
+    Launch --> CameraPermission
+    CameraPermission --> ViewFinder: Granted
+    CameraPermission --> PermissionDenied: Denied
+    
+    state ViewFinder {
+        [*] --> Preview
+        Preview --> PhotoMode
+        Preview --> VideoMode
+        Preview --> PortraitMode
+        
+        PhotoMode --> Processing: Capture
+        VideoMode --> Recording: Start
+        Recording --> Processing: Stop
+        PortraitMode --> Processing: Capture
+        
+        state Processing {
+            ImageProcessing
+            SaveToGallery
+            ApplyEffects
+        }
+    }
+    
+    state "Camera Settings" as Settings {
+        FlashSettings
+        TimerSettings
+        ResolutionSettings
+        GridOverlay
+    }
+    
+    state "Gallery Integration" as Gallery {
+        ThumbnailView
+        FullScreenView
+        ShareOptions
+        EditTools
+    }
+    
+    Processing --> Preview
+    Processing --> Gallery
