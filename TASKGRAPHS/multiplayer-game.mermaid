@@ -1,0 +1,37 @@
+stateDiagram-v2
+    [*] --> Launch
+    Launch --> Authentication
+    
+    state Authentication {
+        [*] --> Login
+        Login --> GuestMode: Skip
+        Login --> UserAccount: Success
+        Login --> RetryLogin: Failed
+        RetryLogin --> Login
+    }
+    
+    state "Game Loop" as GameLoop {
+        MainMenu --> MatchMaking
+        MatchMaking --> LobbyWait
+        LobbyWait --> GameSession
+        
+        state GameSession {
+            [*] --> Loading
+            Loading --> ActiveGame
+            ActiveGame --> PauseMenu
+            PauseMenu --> ActiveGame
+            ActiveGame --> GameOver
+            GameOver --> PostGameStats
+        }
+        
+        PostGameStats --> MainMenu
+    }
+    
+    state "Network Sync" as NetworkSync {
+        PlayerSync
+        GameStateSync
+        ScoreSync
+    }
+    
+    UserAccount --> GameLoop
+    GuestMode --> GameLoop
