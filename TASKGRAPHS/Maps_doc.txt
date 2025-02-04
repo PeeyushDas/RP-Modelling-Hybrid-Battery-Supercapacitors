@@ -1,0 +1,25 @@
+Maps Application:
+
+
+Starts with location permission handling
+Main states include map viewing, search, navigation, and explore modes
+Includes background tasks for location and traffic updates
+Shows how navigation recalculation works when off-route
+
+
+Multiplayer Game:
+
+
+Begins with authentication flow (including guest mode)
+Shows complete game loop from matchmaking to post-game stats
+Includes network synchronization states
+Demonstrates how pause menu and game states interact
+
+
+Camera Application:
+
+
+Handles camera permissions
+Shows different capture modes (photo, video, portrait)
+Includes processing pipeline and gallery integration
+Incorporates camera settings management
