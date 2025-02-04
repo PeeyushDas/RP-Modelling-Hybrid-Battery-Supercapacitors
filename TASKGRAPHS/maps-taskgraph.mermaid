@@ -1,0 +1,30 @@
+stateDiagram-v2
+    [*] --> Launch
+    Launch --> LocationPermission
+    LocationPermission --> MapView: Granted
+    LocationPermission --> RestrictedMode: Denied
+    
+    state MapView {
+        [*] --> LoadingMap
+        LoadingMap --> DisplayMap
+        DisplayMap --> SearchMode
+        DisplayMap --> NavigationMode
+        DisplayMap --> ExploreMode
+        
+        SearchMode --> RouteCalculation
+        RouteCalculation --> NavigationMode
+        
+        NavigationMode --> TurnByTurn
+        TurnByTurn --> RouteRecalculation: Off Route
+        RouteRecalculation --> TurnByTurn
+        
+        ExploreMode --> POIDetails
+        POIDetails --> DirectionsToPOI
+        DirectionsToPOI --> RouteCalculation
+    }
+    
+    state "Background Tasks" as BG {
+        LocationUpdates
+        TrafficUpdates
+        MapDataCache
+    }
